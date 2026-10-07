@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "tanod-slither-detectors"
+version = "0.1.0"
+description = "Slither detectors for recurring DeFi bug classes: unchecked ERC-20 calls, AMM spot prices, zero slippage, missing deadlines, unsafe downcasts, ERC-4626 inflation, ecrecover and signature replay, stale Chainlink prices"
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.10"
+dependencies = ["slither-analyzer>=0.10"]
+keywords = ["slither", "solidity", "security", "static-analysis", "defi", "ethereum"]
+
+[project.urls]
+Homepage = "https://github.com/tanod-labs/slither-detectors"
+"Hosted scanner" = "https://tanod.dev"
+
+[project.optional-dependencies]
+test = ["pytest>=8", "solc-select>=1.0"]
+
+[project.entry-points."slither_analyzer.plugin"]
+tanod = "tanod_slither_detectors:make_plugin"
+
+[tool.setuptools]
+packages = ["tanod_slither_detectors"]
