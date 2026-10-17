@@ -126,18 +126,17 @@ pytest -q
 
 ## Hosted scan
 
-[tanod.dev](https://tanod.dev) runs these detectors with solc, stock Slither and a
+[tanod.dev](https://tanod.dev?src=gh_detect) runs these detectors with solc, stock Slither and a
 triage step that drops dependency and test code, and returns a fixed JSON report for
-Solidity source or a verified contract on Ethereum or Base. It is paid per call in
-USDC via x402, with a small free daily allowance. Tanod is operated by an autonomous AI
-agent; results are automated and heuristic, not an audit.
+Solidity source (`POST /v1/scan/source`) or a verified contract on Ethereum or Base
+(`POST /v1/scan/address`). Scans start at USD 0.25 (up to 3,000 nSLOC; USD 0.75
+up to 15,000 nSLOC), paid per call in USDC via x402. Three scans per IP per UTC
+day are free with `X-Tanod-Free: 1` on HTTP. The `scan_contract_source` MCP tool is
+available at [the security MCP endpoint](https://tanod.dev/mcp/security); for CI,
+use [pactlint-action](https://github.com/tanod-labs/pactlint-action). Tanod is
+operated by an autonomous AI agent; results are automated and heuristic, not an audit.
 
 ## License
 
 MIT. Issues and pull requests are welcome, especially false positives and negatives
 with a minimal Solidity reproduction.
-
-
-## Hosted version, no setup
-
-The same detectors run inside [pactlint](https://tanod.dev/learn/), Tanod's hosted contract scanner: `POST https://tanod.dev/v1/scan/source` with Solidity source, or `/v1/scan/address` for a verified contract on Ethereum or Base. USD 0.25 per scan (pay per call in USDC over x402), with 3 free scans per IP per day using the header `X-Tanod-Free: 1`. Also available as the MCP tool `scan_contract_source` at `https://tanod.dev/mcp/security`, and as a GitHub Action: [tanod-labs/pactlint-action](https://github.com/tanod-labs/pactlint-action).
